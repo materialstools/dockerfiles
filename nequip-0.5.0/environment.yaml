@@ -1,4 +1,4 @@
-name: nequip
+name: base
 channels:
   - conda-forge
   - defaults
