@@ -1,24 +1,39 @@
 #Create ubuntu as base image
-FROM centos
+FROM pytorch/pytorch:1.9.0-cuda10.2-cudnn7-runtime
 
 WORKDIR /home/mphuthi
 
 #Install packages
-RUN yum -y install wget
-RUN yum -y install which
-RUN yum -y install git
-RUN touch .bashrc
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update
+RUN apt install -y wget
+RUN apt install -y git
 RUN sh -c "$(wget https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p install/miniconda3
-ENV PATH="/home/mphuthi/install/miniconda3/bin:${PATH}"
 RUN git clone https://github.com/materialstools/dockerfiles.git
-RUN conda create -n nequip
-RUN conda init bash
-RUN source activate nequip
-RUN conda install python=3.9
-RUN pip3 install torch==1.9.0+cu102 -f https://download.pytorch.org/whl/cu102/torch_stable.html
-RUN conda env update -f dockerfiles/nequip-0.5.0/environment.yaml
+# RUN conda env update -f dockerfiles/nequip-0.5.0/environment.yaml
+# RUN pip install nequip
+    # - torch-ema==0.2
+    # - torch-geometric==1.7.2
+    # - torch-runstats==0.1.0
+    # - torch-scatter==2.0.8
+    # - torch-sparse==0.6.12
+
+
+#Install packages
+# RUN yum -y install wget
+# RUN yum -y install git
+# RUN touch .bashrc
+# RUN sh -c "$(wget https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+# RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p install/miniconda3
+# ENV PATH="/home/mphuthi/install/miniconda3/bin:${PATH}"
+# RUN git clone https://github.com/materialstools/dockerfiles.git
+# RUN conda create -n nequip
+# RUN conda init bash
+# RUN source activate nequip
+# RUN conda install python==3.9
+# RUN pip3 install torch==1.9.0+cu102 -f https://download.pytorch.org/whl/cu102/torch_stable.html
+# RUN conda env update -f dockerfiles/nequip-0.5.0/environment.yaml
 
 
 
