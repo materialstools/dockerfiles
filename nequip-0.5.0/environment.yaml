@@ -117,7 +117,6 @@ dependencies:
     - tabulate==0.8.9
     - tenacity==8.0.1
     - threadpoolctl==2.2.0
-    - torch==1.9.0+cu102
     - torch-ema==0.2
     - torch-geometric==1.7.2
     - torch-runstats==0.1.0

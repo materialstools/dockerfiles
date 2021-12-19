@@ -7,8 +7,18 @@ WORKDIR /home/mphuthi
 RUN yum -y install wget
 RUN yum -y install which
 RUN yum -y install git
+RUN touch .bashrc
+RUN sh -c "$(wget https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p install/miniconda3
 ENV PATH="/home/mphuthi/install/miniconda3/bin:${PATH}"
+RUN git clone https://github.com/materialstools/dockerfiles.git
+RUN conda create -n nequip
 RUN conda init bash
+RUN source activate nequip
+RUN conda install python=3.9
+RUN pip3 install torch==1.9.0+cu102 -f https://download.pytorch.org/whl/cu102/torch_stable.html
+RUN conda env update -f dockerfiles/nequip-0.5.0/environment.yaml
+
+
 
