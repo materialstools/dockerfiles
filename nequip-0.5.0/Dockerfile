@@ -21,6 +21,10 @@ RUN conda install --name nequip python==3.9
 RUN conda activate nequip
 RUN pip3 install torch==1.9.0+cu102 -f https://download.pytorch.org/whl/cu102/torch_stable.html
 RUN conda env update -f dockerfiles/nequip-0.5.0/environment.yaml
+RUN conda install pyg -c pyg -c conda-forge
+RUN git clone https://github.com/mir-group/nequip.git
+RUN cd nequip
+RUN pip install .
 # RUN pip install nequip
     # - torch-ema==0.2
     # - torch-geometric==1.7.2
